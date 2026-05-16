@@ -1,11 +1,55 @@
 /* =============================================================
-   GRIMHEIM — Obsidian Snippet
+   GRIMHEIM — Obsidian Theme
    Grim-dark fantasy tabletop theme for Obsidian.
-   Drop into  .obsidian/snippets/  and enable in
-   Settings → Appearance → CSS snippets.
 
-   Works on Obsidian's default theme (dark mode recommended).
+   Install: .obsidian/themes/Grimheim/  (theme.css + manifest.json)
+   Select:  Settings → Appearance → Themes → Grimheim.
+
+   Dark-only. Set the base color scheme to Dark.
+   Variants below are toggleable via the Style Settings plugin.
    ============================================================= */
+
+/* @settings
+
+name: Grimheim
+id: grimheim
+settings:
+    -
+        id: gh-blood-intensity
+        title: Blood-accent intensity
+        description: Strength of the blood-red tag and accent tints.
+        type: variable-number-slider
+        default: 1
+        min: 1
+        max: 1.8
+        step: 0.1
+    -
+        id: gh-heading-fell
+        title: Fell English headings
+        description: Swap H1/H2 from Gothic display to IM Fell English SC.
+        type: class-toggle
+    -
+        id: gh-callout-woodcut
+        title: Woodcut callout frame
+        description: Double-stroke woodcut frame on callouts.
+        type: class-toggle
+    -
+        id: gh-callout-parchment
+        title: Parchment callouts
+        description: Render callouts as parchment slips with an iron-stamp header.
+        type: class-toggle
+    -
+        id: gh-grain
+        title: Paper-grain overlay
+        description: Subtle paper-grain texture across notes.
+        type: class-toggle
+    -
+        id: gh-dropcap
+        title: Illuminated drop-caps
+        description: First letter of the first paragraph as an IM Fell English drop-cap.
+        type: class-toggle
+
+*/
 
 /* ---------- Webfonts ---------- */
 
