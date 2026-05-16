@@ -89,7 +89,7 @@ The theme ships opt-in variants. Install the **Style Settings** plugin
 | Setting | Effect |
 |---|---|
 | *(defaults)* | Gothic display headings, iron-seal callouts |
-| Blood-accent intensity | Slider `1`–`1.8` — strength of blood-red tag and accent tints |
+| Blood-accent intensity | Slider `0.2`–`1.6` (default `0.6`) — strength of blood-red tag and accent tints |
 | Fell English headings | H1/H2 swap to **IM Fell English SC** (less bold, more antiquarian) |
 | Woodcut callout frame | Callouts get a double-stroke woodcut frame |
 | Parchment callouts | Callouts render as parchment slips with iron-stamp header |

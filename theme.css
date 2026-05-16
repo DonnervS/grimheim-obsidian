@@ -6,7 +6,8 @@
    Select:  Settings → Appearance → Themes → Grimheim.
 
    Dark-only. Set the base color scheme to Dark.
-   Variants below are toggleable via the Style Settings plugin.
+   Tuned for default-theme readability — neutral surfaces, cool gray
+   text. Variants below are toggleable via the Style Settings plugin.
    ============================================================= */
 
 /* @settings
@@ -17,11 +18,11 @@ settings:
     -
         id: gh-blood-intensity
         title: Blood-accent intensity
-        description: Strength of the blood-red tag and accent tints.
+        description: Strength of the blood-red tag and accent tints. 0.6 is the tuned default.
         type: variable-number-slider
-        default: 1
-        min: 1
-        max: 1.8
+        default: 0.6
+        min: 0.2
+        max: 1.6
         step: 0.1
     -
         id: gh-heading-fell
@@ -29,15 +30,22 @@ settings:
         description: Swap H1/H2 from Gothic display to IM Fell English SC.
         type: class-toggle
     -
-        id: gh-callout-woodcut
-        title: Woodcut callout frame
-        description: Double-stroke woodcut frame on callouts.
-        type: class-toggle
-    -
-        id: gh-callout-parchment
-        title: Parchment callouts
-        description: Render callouts as parchment slips with an iron-stamp header.
-        type: class-toggle
+        id: gh-callout-style
+        title: Callout style
+        description: Iron seal (default), woodcut frame, or parchment slip.
+        type: class-select
+        allowEmpty: false
+        default: gh-callout-seal
+        options:
+            -
+                label: Iron seal
+                value: gh-callout-seal
+            -
+                label: Woodcut frame
+                value: gh-callout-woodcut
+            -
+                label: Parchment slip
+                value: gh-callout-parchment
     -
         id: gh-grain
         title: Paper-grain overlay
@@ -72,20 +80,23 @@ settings:
 
 .theme-dark,
 .theme-light {
-  /* Ink */
-  --gh-ink-1000: #07060a;
-  --gh-ink-900:  #0e0c0a;
-  --gh-ink-800:  #15120f;
-  --gh-ink-700:  #1f1b17;
-  --gh-ink-600:  #2a251f;
-  --gh-ink-500:  #3a342c;
+  /* Ink — neutral, lifted blacks aligned to Obsidian default contrast
+     (around #1e1e1e). Previously skewed very dark + warm, which made the
+     editor feel heavier than the stock theme. */
+  --gh-ink-1000: #161616;
+  --gh-ink-900:  #1c1c1c;
+  --gh-ink-800:  #232323;
+  --gh-ink-700:  #2c2c2c;
+  --gh-ink-600:  #363636;
+  --gh-ink-500:  #4a4a4a;
 
-  /* Bone */
-  --gh-bone-50:  #f4eedc;
-  --gh-bone-100: #ece4cd;
-  --gh-bone-200: #d9cfb3;
-  --gh-bone-300: #b8ad8e;
-  --gh-bone-400: #8b8067;
+  /* Bone — text scale. Cooler & less saturated; body copy now reads as
+     a neutral light gray (≈ Obsidian default #dcddde) instead of warm cream. */
+  --gh-bone-50:  #f2f2f2;
+  --gh-bone-100: #dcdcdc;
+  --gh-bone-200: #b8b8b8;
+  --gh-bone-300: #9a9a9a;
+  --gh-bone-400: #6f6f6f;
 
   /* Blood */
   --gh-blood-900: #3a0d0a;
@@ -111,8 +122,8 @@ settings:
   --gh-font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   /* Blood-accent intensity — overridable by user.
-     1 = sparse (default), 1.4 = mid, 1.8 = strong  */
-  --gh-blood-intensity: 1;
+     0.6 = sparse (now default), 1 = mid, 1.4+ = strong  */
+  --gh-blood-intensity: 0.6;
 }
 
 /* =============================================================
@@ -204,8 +215,8 @@ body {
 .markdown-preview-view,
 .markdown-reading-view {
   font-family: var(--gh-font-serif);
-  font-size: 17px;
-  line-height: 1.55;
+  font-size: 16px;
+  line-height: 1.65;
   color: var(--text-normal);
 }
 
@@ -223,14 +234,14 @@ body {
 .HyperMD-header-1 {
   font-family: var(--gh-font-display) !important;
   font-weight: 200 !important;
-  font-size: 44px !important;
-  line-height: 1.05 !important;
+  font-size: 38px !important;
+  line-height: 1.1 !important;
   letter-spacing: 0 !important;
   text-transform: uppercase !important;
   color: var(--h1-color) !important;
-  margin: 0.2em 0 0.4em !important;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--gh-ink-600);
+  margin: 0.2em 0 0.5em !important;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .markdown-preview-view h2,
@@ -238,13 +249,13 @@ body {
 .HyperMD-header-2 {
   font-family: var(--gh-font-display) !important;
   font-weight: 200 !important;
-  font-size: 30px !important;
-  line-height: 1.15 !important;
+  font-size: 26px !important;
+  line-height: 1.2 !important;
   text-transform: uppercase !important;
   color: var(--h2-color) !important;
-  margin: 1.4em 0 0.4em !important;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--gh-ink-600);
+  margin: 1.6em 0 0.4em !important;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .markdown-preview-view h3,
@@ -344,14 +355,14 @@ body {
 
 .tag,
 a.tag {
-  background: rgba(122, 31, 26, calc(0.18 * var(--gh-blood-intensity)));
+  background: rgba(122, 31, 26, calc(0.14 * var(--gh-blood-intensity)));
   color: var(--gh-blood-300);
-  border: 1px solid var(--gh-blood-700);
+  border: 1px solid rgba(122, 31, 26, calc(0.55 * var(--gh-blood-intensity)));
   border-radius: 2px;
   padding: 1px 8px;
   font-family: var(--gh-font-sans);
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
@@ -477,23 +488,15 @@ a.tag {
   font-family: var(--gh-font-accent);
   font-style: italic;
   color: var(--gh-bone-200);
-  border-left: 3px solid var(--gh-blood-700) !important;
-  background: rgba(94, 22, 18, 0.06);
-  padding: 12px 20px !important;
-  margin: 20px 0 !important;
-  font-size: 18px;
-  line-height: 1.55;
+  border-left: 2px solid var(--gh-blood-700) !important;
+  background: transparent;
+  padding: 4px 18px !important;
+  margin: 18px 0 !important;
+  font-size: 16.5px;
+  line-height: 1.6;
 }
 
-.markdown-preview-view blockquote::before {
-  content: "“";
-  font-family: var(--gh-font-display);
-  font-size: 48px;
-  line-height: 0.7;
-  color: var(--gh-blood-700);
-  float: left;
-  margin: 8px 8px 0 -4px;
-}
+.markdown-preview-view blockquote::before { content: none; }
 
 /* =============================================================
    LISTS / HR
@@ -547,24 +550,24 @@ a.tag {
   font-size: 14px;
   border-collapse: collapse;
   border: 1px solid var(--gh-ink-600);
-  background: var(--gh-ink-1000);
-  border-radius: 0;
+  background: transparent;
+  border-radius: 4px;
   margin: 20px 0;
   width: 100%;
 }
 
 .markdown-preview-view thead {
-  background: linear-gradient(180deg, var(--gh-ink-700) 0%, var(--gh-ink-800) 100%);
-  border-bottom: 1px solid var(--gh-gold-700, #8a6f2c);
+  background: var(--gh-ink-800);
+  border-bottom: 1px solid var(--gh-ink-500);
 }
 
 .markdown-preview-view thead th {
   font-family: var(--gh-font-sans);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 11px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--gh-bone-50);
+  color: var(--gh-bone-200);
   padding: 10px 14px;
   text-align: left;
   border-right: 1px solid var(--gh-ink-600);
@@ -578,11 +581,11 @@ a.tag {
 }
 
 .markdown-preview-view tbody tr:nth-child(even) td {
-  background: rgba(236, 228, 205, 0.02);
+  background: rgba(255, 255, 255, 0.015);
 }
 
 .markdown-preview-view tbody tr:hover td {
-  background: rgba(199, 162, 74, 0.05);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 /* Numerals in tables = mono tabular */
@@ -601,34 +604,40 @@ a.tag {
   --callout-radius: 2px;
   --callout-border-width: 1px;
   font-family: var(--gh-font-serif);
-  margin: 20px 0 !important;
-  border-radius: 2px !important;
+  margin: 18px 0 !important;
+  border-radius: 4px !important;
   overflow: hidden;
   border: 1px solid var(--gh-ink-600);
-  background: var(--gh-ink-1000);
-  box-shadow:
-    0 2px 0 rgba(0,0,0,0.4),
-    inset 0 1px 0 rgba(236,228,205,0.04);
+  background: var(--gh-ink-800);
+  box-shadow: none;
 }
 
 .callout-title {
   font-family: var(--gh-font-sans) !important;
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   font-size: 11px !important;
-  letter-spacing: 0.22em !important;
+  letter-spacing: 0.18em !important;
   text-transform: uppercase !important;
-  color: var(--gh-bone-50) !important;
-  padding: 10px 14px !important;
-  background: linear-gradient(180deg, var(--gh-ink-700) 0%, var(--gh-ink-800) 100%);
+  color: var(--gh-bone-100) !important;
+  padding: 8px 14px !important;
+  background: rgba(255,255,255,0.02);
   border-bottom: 1px solid var(--gh-ink-600);
 }
 
-.callout-icon { color: var(--gh-rust-400); }
+.callout-icon { color: var(--gh-rust-400); opacity: 0.85; }
+.callout-icon svg,
+.callout-title svg,
+.callout-title .callout-icon {
+  width: 13px !important;
+  height: 13px !important;
+  stroke-width: 2;
+  vertical-align: -2px;
+}
 .callout-content {
-  padding: 14px 18px !important;
+  padding: 12px 16px !important;
   color: var(--gh-bone-200);
-  font-size: 15.5px;
-  line-height: 1.55;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .callout-content p { margin: 0 0 8px; }
@@ -824,9 +833,9 @@ body.gh-dropcap .markdown-preview-section > div > p:first-of-type::first-letter 
 
 .nav-file-title.is-active,
 .nav-file-title.has-focus {
-  background: rgba(122, 31, 26, 0.22);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--gh-bone-50);
-  border-left: 2px solid var(--gh-blood-500);
+  border-left: 2px solid var(--gh-blood-600);
 }
 
 .nav-folder-title {
