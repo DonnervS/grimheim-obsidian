@@ -1,0 +1,870 @@
+/* =============================================================
+   GRIMHEIM — Obsidian Snippet
+   Grim-dark fantasy tabletop theme for Obsidian.
+   Drop into  .obsidian/snippets/  and enable in
+   Settings → Appearance → CSS snippets.
+
+   Works on Obsidian's default theme (dark mode recommended).
+   ============================================================= */
+
+/* ---------- Webfonts ---------- */
+
+@font-face {
+  font-family: "Grimheim Gothic";
+  src: url("fonts/GrimheimGothic-Thin.otf") format("opentype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+/* =============================================================
+   TOKENS
+   ============================================================= */
+
+.theme-dark,
+.theme-light {
+  /* Ink */
+  --gh-ink-1000: #07060a;
+  --gh-ink-900:  #0e0c0a;
+  --gh-ink-800:  #15120f;
+  --gh-ink-700:  #1f1b17;
+  --gh-ink-600:  #2a251f;
+  --gh-ink-500:  #3a342c;
+
+  /* Bone */
+  --gh-bone-50:  #f4eedc;
+  --gh-bone-100: #ece4cd;
+  --gh-bone-200: #d9cfb3;
+  --gh-bone-300: #b8ad8e;
+  --gh-bone-400: #8b8067;
+
+  /* Blood */
+  --gh-blood-900: #3a0d0a;
+  --gh-blood-700: #5e1612;
+  --gh-blood-600: #7a1f1a;
+  --gh-blood-500: #9a2a22;
+  --gh-blood-400: #b8453c;
+  --gh-blood-300: #d36b5f;
+
+  /* Accents */
+  --gh-rust-500:  #b5651d;
+  --gh-rust-400:  #cf8543;
+  --gh-moss-500:  #5e6b3e;
+  --gh-moss-400:  #7c8a59;
+  --gh-gold-500:  #c7a24a;
+  --gh-gold-400:  #ddbe72;
+
+  /* Fonts */
+  --gh-font-display: "Grimheim Gothic", "IM Fell English SC", "UnifrakturCook", serif;
+  --gh-font-serif:   "Vollkorn", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --gh-font-accent:  "IM Fell English", "Vollkorn", Georgia, serif;
+  --gh-font-sans:    "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gh-font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Blood-accent intensity — overridable by user.
+     1 = sparse (default), 1.4 = mid, 1.8 = strong  */
+  --gh-blood-intensity: 1;
+}
+
+/* =============================================================
+   APP-LEVEL OVERRIDES — Obsidian theme variables
+   ============================================================= */
+
+.theme-dark {
+  --background-primary:        var(--gh-ink-900);
+  --background-primary-alt:    var(--gh-ink-800);
+  --background-secondary:      var(--gh-ink-1000);
+  --background-secondary-alt:  #050407;
+
+  --background-modifier-border:        var(--gh-ink-600);
+  --background-modifier-border-hover:  var(--gh-ink-500);
+  --background-modifier-border-focus:  var(--gh-gold-500);
+  --background-modifier-hover:         rgba(236, 228, 205, 0.05);
+  --background-modifier-active-hover:  rgba(236, 228, 205, 0.08);
+  --background-modifier-form-field:    var(--gh-ink-1000);
+  --background-modifier-success:       rgba(94, 107, 62, 0.25);
+  --background-modifier-error:         rgba(122, 31, 26, 0.25);
+
+  --text-normal:   var(--gh-bone-100);
+  --text-muted:    var(--gh-bone-300);
+  --text-faint:    var(--gh-bone-400);
+  --text-accent:        var(--gh-blood-400);
+  --text-accent-hover:  var(--gh-blood-300);
+  --text-on-accent:     var(--gh-bone-50);
+  --text-selection:     rgba(199, 162, 74, 0.22);
+  --text-highlight-bg:  rgba(199, 162, 74, 0.30);
+  --text-error:         var(--gh-blood-400);
+  --text-success:       var(--gh-moss-400);
+
+  --interactive-normal:        var(--gh-ink-800);
+  --interactive-hover:         var(--gh-ink-700);
+  --interactive-accent:        var(--gh-blood-600);
+  --interactive-accent-hover:  var(--gh-blood-500);
+
+  --titlebar-background:           var(--gh-ink-1000);
+  --titlebar-background-focused:   var(--gh-ink-1000);
+  --titlebar-text-color:           var(--gh-bone-200);
+  --titlebar-text-color-focused:   var(--gh-bone-100);
+
+  --tab-background-active:         var(--gh-ink-900);
+  --tab-text-color-focused-active: var(--gh-bone-50);
+  --tab-outline-color:             var(--gh-ink-600);
+
+  --divider-color:                 var(--gh-ink-600);
+
+  --link-color:        var(--gh-rust-400);
+  --link-color-hover:  var(--gh-gold-400);
+  --link-unresolved-color: var(--gh-blood-400);
+  --link-external-color:   var(--gh-gold-400);
+
+  --code-background:   var(--gh-ink-1000);
+  --code-normal:       var(--gh-bone-200);
+
+  --bold-color:        var(--gh-bone-50);
+  --italic-color:      var(--gh-bone-200);
+
+  --blockquote-border-thickness: 3px;
+  --blockquote-border-color:     var(--gh-blood-700);
+
+  --h1-color: var(--gh-bone-50);
+  --h2-color: var(--gh-bone-100);
+  --h3-color: var(--gh-bone-200);
+  --h4-color: var(--gh-bone-200);
+  --h5-color: var(--gh-bone-300);
+  --h6-color: var(--gh-bone-300);
+
+  --font-text-theme:       var(--gh-font-serif);
+  --font-interface-theme:  var(--gh-font-sans);
+  --font-monospace-theme:  var(--gh-font-mono);
+}
+
+/* =============================================================
+   BODY / EDITOR
+   ============================================================= */
+
+body {
+  --font-text:       var(--gh-font-serif);
+  --font-interface:  var(--gh-font-sans);
+  --font-monospace:  var(--gh-font-mono);
+  font-feature-settings: "kern", "liga", "onum";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.markdown-source-view,
+.markdown-preview-view,
+.markdown-reading-view {
+  font-family: var(--gh-font-serif);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--text-normal);
+}
+
+.markdown-preview-view p,
+.markdown-source-view .cm-line {
+  text-wrap: pretty;
+}
+
+/* =============================================================
+   HEADINGS — Gothic display, all caps
+   ============================================================= */
+
+.markdown-preview-view h1,
+.cm-header-1,
+.HyperMD-header-1 {
+  font-family: var(--gh-font-display) !important;
+  font-weight: 200 !important;
+  font-size: 44px !important;
+  line-height: 1.05 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+  color: var(--h1-color) !important;
+  margin: 0.2em 0 0.4em !important;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gh-ink-600);
+}
+
+.markdown-preview-view h2,
+.cm-header-2,
+.HyperMD-header-2 {
+  font-family: var(--gh-font-display) !important;
+  font-weight: 200 !important;
+  font-size: 30px !important;
+  line-height: 1.15 !important;
+  text-transform: uppercase !important;
+  color: var(--h2-color) !important;
+  margin: 1.4em 0 0.4em !important;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--gh-ink-600);
+}
+
+.markdown-preview-view h3,
+.cm-header-3,
+.HyperMD-header-3 {
+  font-family: var(--gh-font-accent) !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+  font-size: 24px !important;
+  line-height: 1.25 !important;
+  color: var(--h3-color) !important;
+  margin: 1.2em 0 0.3em !important;
+  letter-spacing: 0.01em;
+}
+
+.markdown-preview-view h4,
+.cm-header-4,
+.HyperMD-header-4 {
+  font-family: var(--gh-font-sans) !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.18em !important;
+  color: var(--gh-bone-300) !important;
+  margin: 1.4em 0 0.3em !important;
+}
+
+.markdown-preview-view h5,
+.cm-header-5,
+.HyperMD-header-5,
+.markdown-preview-view h6,
+.cm-header-6,
+.HyperMD-header-6 {
+  font-family: var(--gh-font-sans) !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.2em !important;
+  color: var(--gh-bone-400) !important;
+}
+
+/* =============================================================
+   PARAGRAPH, EMPHASIS, LINKS
+   ============================================================= */
+
+.markdown-preview-view p,
+.markdown-preview-view li {
+  max-width: 65ch;
+}
+
+.markdown-preview-view strong,
+.cm-strong {
+  color: var(--bold-color);
+  font-weight: 700;
+}
+
+.markdown-preview-view em,
+.cm-em {
+  font-family: var(--gh-font-accent);
+  font-style: italic;
+  color: var(--italic-color);
+}
+
+.markdown-preview-view a.internal-link,
+.cm-hmd-internal-link {
+  color: var(--gh-rust-400);
+  text-decoration-color: rgba(207, 133, 67, 0.35);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.markdown-preview-view a.internal-link:hover {
+  color: var(--gh-gold-400);
+  text-decoration-color: var(--gh-gold-400);
+}
+
+.markdown-preview-view a.internal-link.is-unresolved {
+  color: var(--gh-blood-400);
+  text-decoration-style: dashed;
+}
+
+.markdown-preview-view a.external-link {
+  color: var(--gh-gold-400);
+  text-decoration: underline dotted rgba(221, 190, 114, 0.4);
+  text-underline-offset: 3px;
+}
+
+::selection {
+  background: rgba(199, 162, 74, 0.28);
+  color: var(--gh-bone-50);
+}
+
+/* =============================================================
+   TAGS / PROPERTIES / FRONTMATTER PILLS
+   ============================================================= */
+
+.tag,
+a.tag {
+  background: rgba(122, 31, 26, calc(0.18 * var(--gh-blood-intensity)));
+  color: var(--gh-blood-300);
+  border: 1px solid var(--gh-blood-700);
+  border-radius: 2px;
+  padding: 1px 8px;
+  font-family: var(--gh-font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.tag::before { content: "✠"; margin-right: 4px; opacity: 0.55; }
+
+.tag:hover { background: rgba(122, 31, 26, 0.30); color: var(--gh-blood-300); }
+
+/* Properties panel (frontmatter UI) */
+.metadata-container {
+  background: var(--gh-ink-1000);
+  border: 1px solid var(--gh-ink-600);
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+}
+
+.metadata-property-key {
+  font-family: var(--gh-font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gh-bone-400);
+}
+
+.metadata-property-value,
+.metadata-input-longtext,
+.metadata-input-text {
+  font-family: var(--gh-font-sans);
+  color: var(--gh-bone-100);
+}
+
+/* =============================================================
+   CODE  —  PARCHMENT SLIP WITH IRON-STAMP HEADER
+   ============================================================= */
+
+/* Inline code */
+.markdown-preview-view code,
+.cm-inline-code,
+.markdown-source-view code {
+  font-family: var(--gh-font-mono) !important;
+  font-size: 0.92em;
+  background: var(--gh-ink-1000);
+  color: var(--gh-bone-200);
+  border: 1px solid var(--gh-ink-600);
+  border-radius: 2px;
+  padding: 1px 6px;
+}
+
+/* Fenced block — parchment slip */
+.markdown-preview-view pre,
+.markdown-source-view .HyperMD-codeblock {
+  font-family: var(--gh-font-mono) !important;
+}
+
+.markdown-preview-view pre {
+  position: relative;
+  background:
+    linear-gradient(180deg, #f3ead2 0%, #e8dcb9 100%) !important;
+  color: #2a251f !important;
+  border: 1px solid #5a4717 !important;
+  border-radius: 2px !important;
+  padding: 32px 18px 18px !important;
+  margin: 24px 0 !important;
+  box-shadow:
+    0 2px 0 rgba(0,0,0,0.4),
+    0 10px 24px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.4),
+    inset 0 -1px 0 rgba(74, 71, 23, 0.18);
+}
+
+/* Iron-stamp header bar */
+.markdown-preview-view pre::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 20px;
+  background:
+    linear-gradient(180deg, #2a251f 0%, #15120f 100%);
+  border-bottom: 1px solid #5a4717;
+}
+
+/* Iron sigil pip */
+.markdown-preview-view pre::after {
+  content: "✠ CODEX";
+  position: absolute;
+  top: 2px;
+  left: 12px;
+  font-family: var(--gh-font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: var(--gh-bone-200);
+}
+
+.markdown-preview-view pre code {
+  background: transparent !important;
+  border: none !important;
+  color: #2a251f !important;
+  padding: 0 !important;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* Source-mode codeblock — keep dark, but match the family + a hairline */
+.markdown-source-view .HyperMD-codeblock-bg {
+  background: var(--gh-ink-1000) !important;
+  border-left: 2px solid var(--gh-rust-500);
+}
+
+.markdown-source-view .HyperMD-codeblock {
+  color: var(--gh-bone-200) !important;
+}
+
+/* =============================================================
+   BLOCKQUOTE / FLAVOR TEXT
+   ============================================================= */
+
+.markdown-preview-view blockquote,
+.HyperMD-quote {
+  font-family: var(--gh-font-accent);
+  font-style: italic;
+  color: var(--gh-bone-200);
+  border-left: 3px solid var(--gh-blood-700) !important;
+  background: rgba(94, 22, 18, 0.06);
+  padding: 12px 20px !important;
+  margin: 20px 0 !important;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.markdown-preview-view blockquote::before {
+  content: "“";
+  font-family: var(--gh-font-display);
+  font-size: 48px;
+  line-height: 0.7;
+  color: var(--gh-blood-700);
+  float: left;
+  margin: 8px 8px 0 -4px;
+}
+
+/* =============================================================
+   LISTS / HR
+   ============================================================= */
+
+.markdown-preview-view ul li::marker {
+  color: var(--gh-rust-500);
+}
+
+.markdown-preview-view ol li::marker {
+  color: var(--gh-gold-500);
+  font-family: var(--gh-font-mono);
+  font-weight: 700;
+}
+
+.markdown-preview-view hr {
+  border: none;
+  height: 16px;
+  margin: 32px auto;
+  background: none;
+  text-align: center;
+  position: relative;
+}
+
+.markdown-preview-view hr::before {
+  content: "✦   ✠   ✦";
+  font-family: var(--gh-font-display);
+  font-size: 14px;
+  letter-spacing: 0.5em;
+  color: var(--gh-ink-500);
+  background: var(--gh-ink-900);
+  padding: 0 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.markdown-preview-view hr::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 50%;
+  border-top: 1px solid var(--gh-ink-600);
+  z-index: 0;
+}
+
+/* =============================================================
+   TABLES — rules-table feel
+   ============================================================= */
+
+.markdown-preview-view table {
+  font-family: var(--gh-font-sans);
+  font-size: 14px;
+  border-collapse: collapse;
+  border: 1px solid var(--gh-ink-600);
+  background: var(--gh-ink-1000);
+  border-radius: 0;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.markdown-preview-view thead {
+  background: linear-gradient(180deg, var(--gh-ink-700) 0%, var(--gh-ink-800) 100%);
+  border-bottom: 1px solid var(--gh-gold-700, #8a6f2c);
+}
+
+.markdown-preview-view thead th {
+  font-family: var(--gh-font-sans);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gh-bone-50);
+  padding: 10px 14px;
+  text-align: left;
+  border-right: 1px solid var(--gh-ink-600);
+}
+
+.markdown-preview-view tbody td {
+  padding: 9px 14px;
+  border-top: 1px solid var(--gh-ink-600);
+  border-right: 1px solid var(--gh-ink-600);
+  color: var(--gh-bone-100);
+}
+
+.markdown-preview-view tbody tr:nth-child(even) td {
+  background: rgba(236, 228, 205, 0.02);
+}
+
+.markdown-preview-view tbody tr:hover td {
+  background: rgba(199, 162, 74, 0.05);
+}
+
+/* Numerals in tables = mono tabular */
+.markdown-preview-view table td:has(> code),
+.markdown-preview-view table td code {
+  font-family: var(--gh-font-mono);
+  font-feature-settings: "tnum";
+}
+
+/* =============================================================
+   CALLOUTS — three styles, switchable by data-callout
+   Default fallback = "iron seal"
+   ============================================================= */
+
+.callout {
+  --callout-radius: 2px;
+  --callout-border-width: 1px;
+  font-family: var(--gh-font-serif);
+  margin: 20px 0 !important;
+  border-radius: 2px !important;
+  overflow: hidden;
+  border: 1px solid var(--gh-ink-600);
+  background: var(--gh-ink-1000);
+  box-shadow:
+    0 2px 0 rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(236,228,205,0.04);
+}
+
+.callout-title {
+  font-family: var(--gh-font-sans) !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  color: var(--gh-bone-50) !important;
+  padding: 10px 14px !important;
+  background: linear-gradient(180deg, var(--gh-ink-700) 0%, var(--gh-ink-800) 100%);
+  border-bottom: 1px solid var(--gh-ink-600);
+}
+
+.callout-icon { color: var(--gh-rust-400); }
+.callout-content {
+  padding: 14px 18px !important;
+  color: var(--gh-bone-200);
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+.callout-content p { margin: 0 0 8px; }
+.callout-content p:last-child { margin-bottom: 0; }
+
+/* Tone-tinted edges per callout type */
+.callout[data-callout="note"]    { border-left: 3px solid var(--gh-pewter-500, #7a7460); }
+.callout[data-callout="info"]    { border-left: 3px solid var(--gh-bone-300); }
+.callout[data-callout="tip"],
+.callout[data-callout="hint"]    { border-left: 3px solid var(--gh-moss-500); }
+.callout[data-callout="success"],
+.callout[data-callout="check"],
+.callout[data-callout="done"]    { border-left: 3px solid var(--gh-moss-500); }
+.callout[data-callout="warning"],
+.callout[data-callout="caution"] { border-left: 3px solid var(--gh-rust-500); }
+.callout[data-callout="danger"],
+.callout[data-callout="error"],
+.callout[data-callout="failure"],
+.callout[data-callout="fail"]    { border-left: 3px solid var(--gh-blood-500); }
+.callout[data-callout="quote"],
+.callout[data-callout="cite"]    {
+  border-left: 3px solid var(--gh-blood-700);
+  font-family: var(--gh-font-accent);
+  font-style: italic;
+}
+.callout[data-callout="example"],
+.callout[data-callout="lore"]    {
+  border-left: 3px solid var(--gh-gold-700, #8a6f2c);
+  font-family: var(--gh-font-accent);
+}
+.callout[data-callout="abstract"],
+.callout[data-callout="summary"] { border-left: 3px solid var(--gh-rust-500); }
+
+/* Custom Grimheim callouts — use [!warband], [!faction], [!mission], [!rule], [!dice], [!vow] */
+.callout[data-callout="warband"] .callout-title,
+.callout[data-callout="faction"] .callout-title {
+  background: linear-gradient(180deg, var(--gh-blood-700) 0%, var(--gh-blood-900) 100%);
+  color: var(--gh-bone-50) !important;
+}
+.callout[data-callout="warband"],
+.callout[data-callout="faction"] { border-left: 3px solid var(--gh-blood-600); }
+
+.callout[data-callout="mission"] .callout-title {
+  background: linear-gradient(180deg, var(--gh-rust-600, #8a4a17) 0%, var(--gh-rust-700, #6e3c12) 100%);
+  color: var(--gh-bone-50) !important;
+}
+.callout[data-callout="mission"] { border-left: 3px solid var(--gh-rust-500); }
+
+.callout[data-callout="rule"] .callout-title {
+  background: linear-gradient(180deg, var(--gh-ink-700) 0%, var(--gh-ink-900) 100%);
+  color: var(--gh-gold-400) !important;
+}
+.callout[data-callout="rule"] {
+  border-left: 3px solid var(--gh-gold-700, #8a6f2c);
+}
+
+.callout[data-callout="dice"] .callout-content {
+  font-family: var(--gh-font-mono);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--gh-gold-400);
+}
+
+.callout[data-callout="vow"] .callout-content {
+  font-family: var(--gh-font-accent);
+  font-style: italic;
+  color: var(--gh-bone-200);
+}
+.callout[data-callout="vow"] { border-left: 3px solid var(--gh-blood-700); }
+
+/* =============================================================
+   CALLOUT STYLE VARIANTS
+   Switch by adding a class on <body>:
+       .gh-callout-woodcut   double-stroke woodcut frame
+       .gh-callout-seal      iron seal (default)
+       .gh-callout-parchment parchment slip
+   ============================================================= */
+
+body.gh-callout-woodcut .callout {
+  background: var(--gh-ink-900);
+  border: 1px solid var(--gh-ink-500);
+  outline: 1px solid var(--gh-ink-600);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+body.gh-callout-woodcut .callout-title {
+  background: transparent;
+  border-bottom: 1px solid var(--gh-ink-500);
+}
+
+body.gh-callout-parchment .callout {
+  background: linear-gradient(180deg, #f3ead2 0%, #e8dcb9 100%);
+  border: 1px solid #5a4717;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.4), 0 8px 18px rgba(0,0,0,0.35);
+}
+body.gh-callout-parchment .callout-title {
+  background: linear-gradient(180deg, #2a251f 0%, #15120f 100%);
+  color: var(--gh-bone-50) !important;
+}
+body.gh-callout-parchment .callout-content,
+body.gh-callout-parchment .callout-content p { color: #2a251f; }
+body.gh-callout-parchment .callout-content strong { color: #0e0c0a; }
+
+/* =============================================================
+   HEADING TREATMENT VARIANT — Fell English instead of Gothic
+   Add  .gh-heading-fell  on body to swap H1/H2 to IM Fell English SC.
+   ============================================================= */
+
+body.gh-heading-fell .markdown-preview-view h1,
+body.gh-heading-fell .cm-header-1,
+body.gh-heading-fell .HyperMD-header-1 {
+  font-family: "IM Fell English SC", var(--gh-font-accent) !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0.04em !important;
+  font-size: 42px !important;
+}
+
+body.gh-heading-fell .markdown-preview-view h2,
+body.gh-heading-fell .cm-header-2,
+body.gh-heading-fell .HyperMD-header-2 {
+  font-family: "IM Fell English SC", var(--gh-font-accent) !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0.03em !important;
+  font-size: 28px !important;
+}
+
+/* =============================================================
+   PAPER GRAIN on hero notes — opt in with .gh-grain on body
+   ============================================================= */
+
+body.gh-grain .markdown-preview-view {
+  position: relative;
+}
+body.gh-grain .markdown-preview-view::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  z-index: 2;
+  background-image:
+    radial-gradient(rgba(236,228,205,0.6) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.5) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+  mix-blend-mode: overlay;
+}
+
+/* =============================================================
+   DROP CAPS — first letter of first paragraph rendered as
+   an illuminated IM Fell English drop-cap.
+   Opt in with .gh-dropcap on body.
+   ============================================================= */
+
+body.gh-dropcap .markdown-preview-view > div > p:first-of-type::first-letter,
+body.gh-dropcap .markdown-preview-section > div > p:first-of-type::first-letter {
+  font-family: "IM Fell English", var(--gh-font-accent);
+  font-size: 5.4em;
+  line-height: 0.85;
+  float: left;
+  padding: 6px 10px 0 0;
+  color: var(--gh-blood-500);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+}
+
+/* =============================================================
+   APP CHROME — sidebar, tabs, ribbon
+   ============================================================= */
+
+.workspace-tabs .workspace-tab-header.is-active {
+  background: var(--gh-ink-900);
+}
+
+.workspace-tab-header-inner-title {
+  font-family: var(--gh-font-sans);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--gh-bone-200);
+}
+
+.workspace-tab-header.is-active .workspace-tab-header-inner-title {
+  color: var(--gh-bone-50);
+}
+
+.nav-file-title,
+.nav-folder-title {
+  font-family: var(--gh-font-sans);
+  font-size: 13px;
+  color: var(--gh-bone-200);
+}
+
+.nav-file-title.is-active,
+.nav-file-title.has-focus {
+  background: rgba(122, 31, 26, 0.22);
+  color: var(--gh-bone-50);
+  border-left: 2px solid var(--gh-blood-500);
+}
+
+.nav-folder-title {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--gh-bone-300);
+}
+
+.tree-item-icon { color: var(--gh-rust-400); }
+
+.side-dock-ribbon {
+  background: var(--gh-ink-1000);
+  border-right: 1px solid var(--gh-ink-600);
+}
+
+.side-dock-ribbon-action { color: var(--gh-bone-300); }
+.side-dock-ribbon-action:hover { color: var(--gh-blood-300); }
+
+.titlebar { border-bottom: 1px solid var(--gh-ink-600); }
+
+/* Status bar */
+.status-bar {
+  background: var(--gh-ink-1000);
+  border-top: 1px solid var(--gh-ink-600);
+  font-family: var(--gh-font-sans);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--gh-bone-400);
+}
+
+/* =============================================================
+   BUTTONS  / INPUTS
+   ============================================================= */
+
+button,
+.clickable-icon {
+  font-family: var(--gh-font-sans);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border-radius: 4px !important;
+}
+
+.mod-cta,
+button.mod-cta {
+  background: var(--gh-blood-600) !important;
+  color: var(--gh-bone-50) !important;
+  border: 1px solid var(--gh-blood-700) !important;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+.mod-cta:hover { background: var(--gh-blood-500) !important; }
+
+input[type="text"],
+input[type="search"],
+textarea,
+.prompt-input {
+  font-family: var(--gh-font-sans);
+  background: var(--gh-ink-1000) !important;
+  border: 1px solid var(--gh-ink-600) !important;
+  color: var(--gh-bone-100) !important;
+  border-radius: 4px !important;
+}
+
+input:focus,
+textarea:focus,
+.prompt-input:focus {
+  outline: none;
+  border-color: var(--gh-gold-500) !important;
+  box-shadow: 0 0 0 2px rgba(199,162,74,0.18);
+}
+
+/* =============================================================
+   GRAPH VIEW
+   ============================================================= */
+
+.graph-view.color-fill         { color: var(--gh-bone-300); }
+.graph-view.color-line         { color: var(--gh-ink-500); }
+.graph-view.color-text         { color: var(--gh-bone-200); }
+.graph-view.color-fill-tag     { color: var(--gh-blood-400); }
+.graph-view.color-fill-unresolved { color: var(--gh-rust-500); }
+.graph-view.color-fill-attachment { color: var(--gh-gold-500); }
+.graph-view.color-arrow        { color: var(--gh-ink-500); }
+.graph-view.color-fill-highlight  { color: var(--gh-gold-500); }
